@@ -8,8 +8,23 @@ $('#infoSubmissionButton').on('click', addInfoToArray);
 let employeeInfoArray = [];
 
 function addInfoToArray () {
-    console.log('✨');
-    // let newFirstName = $('#firstNameInput').val();
+    // console.log('✨');
+    let newFirstName = $('#firstNameInput').val();
+    let newLastName = $('#lastNameInput').val();
+    let newIDNumber = $('#employeeIDInput').val();
+    let newJobTitle = $('#jobTitleInput').val();
+    let newAnnualSalary = $('#annualSalaryInput').val();
+
+    let employeeInfoObject = {
+        firstName: newFirstName,
+        lastName: newLastName,
+        idNumber: newIDNumber,
+        jobTitle: newJobTitle,
+        AnnualSalary: newAnnualSalary
+    }
+
+    employeeInfoArray.push(employeeInfoObject);
+    // console.log(employeeInfoArray);
 }
 
 // The application should have an input form that collects:
