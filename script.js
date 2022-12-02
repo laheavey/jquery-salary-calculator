@@ -25,6 +25,16 @@ function addInfoToArray () {
 
     employeeInfoArray.push(employeeInfoObject);
     // console.log(employeeInfoArray);
+
+    $('#firstNameInput').val('');
+    $('#lastNameInput').val('');
+    $('#employeeIDInput').val('');
+    $('#jobTitleInput').val('');
+    $('#annualSalaryInput').val('');
+}
+
+function addInfotoTable () {
+    
 }
 
 // The application should have an input form that collects:
@@ -44,10 +54,11 @@ function addInfoToArray () {
 // reported total.
 
     // 1. Create an input form that collects the above parameters w/ a submit button.
-    //      a. Submit button grabs form info & stores it (in an array? or object?)
-    //      b. Submitted info used to calculate monthly costs
-    //      c. Monthly cost total appears on the DOM
-    //      d. Input fields are cleared
+    //      a. ✅ Submit button grabs form info & stores it (in an array? or object?)
+    //      b. Info added to table on the DOM
+    //      c. Submitted info used to calculate monthly costs
+    //      d. Monthly cost total appears on the DOM
+    //      e. Input fields are cleared
     // 2. Calculate monthly costs using 1.a.
     //      a. Add these to the DOM
     //      b. If monthly cost total exceeds $20k, field background becomes red
