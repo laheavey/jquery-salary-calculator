@@ -93,10 +93,6 @@ function overBudget () {
     }
 }
 
-
-let stringArray = employeeInfoArray[0].firstName.toString();
-console.log(stringArray);
-
 function removeEmployee () {
     let buttonLineFirstName = $(this).closest('tr').children('#employeeFirstName').text();
     let remainingEmployees = [];
@@ -109,37 +105,8 @@ function removeEmployee () {
     renderTable(); 
 }
 
+// BASE MODE 🅱️
 
-//   let carsToKeep = [];
-//   for (let car of garage) {
-//     if (yearText !== car.year) {
-//       carsToKeep.push(car);
-//     }
-//   } 
-//   garage = carsToKeep;
-//   renderGarage(); 
-
-
-    // console.log($(this));
-    // console.log($(this).parent());
-    // console.log($(this).parent().parent());
-    // console.log($(this).parent().parent().children('#employeeFirstName'));
-    // console.log($(this).parent().parent().children('#employeeFirstName').text());
-    // console.log($(this).closest('tr').children('#employeeFirstName').text());
-    // console.log(employeeInfoArray[0].firstName);
-    // if (employee == $(this).closest('tr').children('#employeeFirstName').text()){
-    //     console.log(typeof employee);
-    //     console.log(typeof $(this).closest('tr').children('#employeeFirstName').text());
-    //     return true;
-    // } else if (employee === $(this).closest('tr').children('#employeeFirstName').text()){
-    //     console.log(typeof employee);
-    //     console.log(typeof $(this).closest('tr').children('#employeeFirstName').text());
-    //     return true;
-
-    // 
-
-
-// omeArray.filter(person => person.name != 'John');
 // The application should have an input form that collects:
 //  _employee first name, last name, ID number, job title, annual salary
 
@@ -163,4 +130,15 @@ function removeEmployee () {
     // 2. Calculate monthly costs using 1.a.
     //      a. ✅ Add these to the DOM
     //      b. ✅ If monthly cost total exceeds $20k, field background becomes red
-    // 3. Create a delete button that removes employee from DOM
+    // 3. ✅ Create a delete button that removes employee from DOM
+
+// STRETCH MODE 🙆‍♀️
+
+// Add styling or extra functionality that fits with the theme of this assignment.
+
+// Once the employee is deleted, update the _Total Monthly Cost_ section on the page 
+//to reflect the employee's removal. _HINT:_ You will need to figure out which employee 
+//was removed, in order to subtract their salary from the total. Consider using `.text()` 
+//as a getter, or look into jQuery's `.data()` function. This is tricky!
+
+
