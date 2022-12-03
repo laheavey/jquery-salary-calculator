@@ -3,10 +3,8 @@ $(document).ready(readyNow);
 function readyNow () {
     $('#infoSubmissionButton').on('click', addInfo);
     $('body').on('click', '#removeEmployeeButton', removeEmployee);
-
     renderTable ();
     renderCosts();
-
 }
 
 let employeeInfoArray = [
@@ -21,7 +19,6 @@ let employeeInfoArray = [
 ];
 
 function addInfo () {
-    // console.log('✨');
     let newFirstName = $('#firstNameInput').val();
     let newLastName = $('#lastNameInput').val();
     let newIDNumber = $('#employeeIDInput').val();
@@ -37,7 +34,7 @@ function addInfo () {
     }
 
     employeeInfoArray.push(employeeInfoObject);
-    // console.log(employeeInfoArray);
+
     renderTable ();
     renderCosts ();
 
@@ -46,12 +43,9 @@ function addInfo () {
     $('#employeeIDInput').val('');
     $('#jobTitleInput').val('');
     $('#annualSalaryInput').val('');
-
-
 }
 
 function renderTable () {
-    // console.log('🫧')
     $('tbody').empty();
     for (let employee of employeeInfoArray) {
         $('tbody').append(`
@@ -90,6 +84,8 @@ function renderCosts () {
 function overBudget () {    
     if (monthlyCosts > 20000) {
         $('#displayedCost').css({ "background-color": "red"});
+    } else {
+        $('#displayedCost').css({ "background-color": "white"});
     }
 }
 
@@ -137,9 +133,9 @@ function removeEmployee () {
 
 // Add styling or extra functionality that fits with the theme of this assignment.
 
-// Once the employee is deleted, update the _Total Monthly Cost_ section on the page 
-//to reflect the employee's removal. _HINT:_ You will need to figure out which employee 
-//was removed, in order to subtract their salary from the total. Consider using `.text()` 
-//as a getter, or look into jQuery's `.data()` function. This is tricky!
+// ✅ Once the employee is deleted, update the _Total Monthly Cost_ section on the page 
+// to reflect the employee's removal. _HINT:_ You will need to figure out which employee 
+// was removed, in order to subtract their salary from the total. Consider using `.text()` 
+// as a getter, or look into jQuery's `.data()` function. This is tricky!
 
 
