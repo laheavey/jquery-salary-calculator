@@ -20,7 +20,7 @@ function addInfoToArray () {
         lastName: newLastName,
         idNumber: newIDNumber,
         jobTitle: newJobTitle,
-        AnnualSalary: newAnnualSalary
+        annualSalary: newAnnualSalary
     }
 
     employeeInfoArray.push(employeeInfoObject);
@@ -31,10 +31,22 @@ function addInfoToArray () {
     $('#employeeIDInput').val('');
     $('#jobTitleInput').val('');
     $('#annualSalaryInput').val('');
+
+    renderTable ();
 }
 
-function addInfotoTable () {
-    
+function renderTable () {
+    // console.log('🫧')
+    $('#bodyRow').empty();
+    for (let employee of employeeInfoArray) {
+        $('#bodyRow').append(`
+        <td>${employee.firstName}</td>
+        <td>${employee.lastName}</td>
+        <td>${employee.idNumber}</td>
+        <td>${employee.jobTitle}</td>
+        <td>${employee.annualSalary}</td>
+        `)
+    }
 }
 
 // The application should have an input form that collects:
