@@ -5,19 +5,19 @@ function readyNow () {
     $('body').on('click', '#removeEmployeeButton', removeEmployee);
 
     renderTable ();
-    // renderCosts();
+    renderCosts();
 
 }
 
 let employeeInfoArray = [
     // DUMMY DATA
-    {
-        firstName: 'Lauren',
-        lastName: 'Heavey',
-        idNumber: '1234',
-        jobTitle: 'professional',
-        annualSalary: 450000
-    }
+    // {
+    //     firstName: 'Lauren',
+    //     lastName: 'Heavey',
+    //     idNumber: '1234',
+    //     jobTitle: 'professional',
+    //     annualSalary: 450000
+    // }
 ];
 
 function addInfo () {
@@ -103,6 +103,7 @@ function removeEmployee () {
     }
     employeeInfoArray = remainingEmployees;
     renderTable(); 
+    renderCosts();
 }
 
 // BASE MODE 🅱️
