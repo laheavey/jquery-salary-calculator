@@ -1,11 +1,21 @@
 $(document).ready(readyNow);
 
 function readyNow () {
-$('#infoSubmissionButton').on('click', addInfoToArray);
+    $('#infoSubmissionButton').on('click', addInfoToArray);
+    renderTable ();
+    // renderCosts();
 
 }
 
-let employeeInfoArray = [];
+let employeeInfoArray = [
+    {
+        firstName: 'Lauren',
+        lastName: 'Heavey',
+        idNumber: '1234',
+        jobTitle: 'professional',
+        annualSalary: 450000
+    }
+];
 
 function addInfoToArray () {
     // console.log('✨');
@@ -25,6 +35,8 @@ function addInfoToArray () {
 
     employeeInfoArray.push(employeeInfoObject);
     // console.log(employeeInfoArray);
+    renderTable ();
+    renderCosts ();
 
     $('#firstNameInput').val('');
     $('#lastNameInput').val('');
@@ -32,21 +44,42 @@ function addInfoToArray () {
     $('#jobTitleInput').val('');
     $('#annualSalaryInput').val('');
 
-    renderTable ();
+
 }
 
 function renderTable () {
     // console.log('🫧')
-    $('#bodyRow').empty();
+    $('tbody').empty();
     for (let employee of employeeInfoArray) {
-        $('#bodyRow').append(`
-        <td>${employee.firstName}</td>
-        <td>${employee.lastName}</td>
-        <td>${employee.idNumber}</td>
-        <td>${employee.jobTitle}</td>
-        <td>${employee.annualSalary}</td>
+        $('tbody').append(`
+        <tr>
+            <td>${employee.firstName}</td>
+            <td>${employee.lastName}</td>
+            <td>${employee.idNumber}</td>
+            <td>${employee.jobTitle}</td>
+            <td>${employee.annualSalary}</td>
+        <tr>
         `)
     }
+}
+
+let monthlyCosts = 0;
+
+function calculateCosts () {
+    let totalSalaries = 0
+    for (let employee of employeeInfoArray) {
+        totalSalaries += parseInt(employee.annualSalary);
+        // console.log(monthlyCosts);
+    }
+    monthlyCosts = parseInt(totalSalaries);
+    return monthlyCosts;
+}
+
+function renderCosts () {
+    $('#displayedCost').empty();
+    calculateCosts();
+    // Number(monthlyCosts);
+    $('#displayedCost').append(`${monthlyCosts}`);
 }
 
 // The application should have an input form that collects:
@@ -67,7 +100,7 @@ function renderTable () {
 
     // 1. Create an input form that collects the above parameters w/ a submit button.
     //      a. ✅ Submit button grabs form info & stores it (in an array? or object?)
-    //      b. Info added to table on the DOM
+    //      b. ✅ Info added to table on the DOM
     //      c. Submitted info used to calculate monthly costs
     //      d. Monthly cost total appears on the DOM
     //      e. Input fields are cleared
