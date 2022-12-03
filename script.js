@@ -1,8 +1,9 @@
 $(document).ready(readyNow);
 
 function readyNow () {
-    $('#infoSubmissionButton').on('click', addInfoToArray);
-    // $('body').on('click', 'monthlyCosts', overBudget);
+    $('#infoSubmissionButton').on('click', addInfo);
+    $('body').on('click', '#removeEmployeeButton', removeEmployee);
+
     renderTable ();
     // renderCosts();
 
@@ -10,16 +11,16 @@ function readyNow () {
 
 let employeeInfoArray = [
     // DUMMY DATA
-    // {
-    //     firstName: 'Lauren',
-    //     lastName: 'Heavey',
-    //     idNumber: '1234',
-    //     jobTitle: 'professional',
-    //     annualSalary: 450000
-    // }
+    {
+        firstName: 'Lauren',
+        lastName: 'Heavey',
+        idNumber: '1234',
+        jobTitle: 'professional',
+        annualSalary: 450000
+    }
 ];
 
-function addInfoToArray () {
+function addInfo () {
     // console.log('✨');
     let newFirstName = $('#firstNameInput').val();
     let newLastName = $('#lastNameInput').val();
@@ -55,12 +56,13 @@ function renderTable () {
     for (let employee of employeeInfoArray) {
         $('tbody').append(`
         <tr>
-            <td>${employee.firstName}</td>
+            <td id="employeeFirstName">${employee.firstName}</td>
             <td>${employee.lastName}</td>
             <td>${employee.idNumber}</td>
             <td>${employee.jobTitle}</td>
             <td>${employee.annualSalary}</td>
-        <tr>
+            <td><button id="removeEmployeeButton">Remove Employee</button></td>
+        </tr>
         `)
     }
 }
@@ -91,6 +93,53 @@ function overBudget () {
     }
 }
 
+
+let stringArray = employeeInfoArray[0].firstName.toString();
+console.log(stringArray);
+
+function removeEmployee () {
+    let buttonLineFirstName = $(this).closest('tr').children('#employeeFirstName').text();
+    let remainingEmployees = [];
+    for (let employee of employeeInfoArray) {
+        if (buttonLineFirstName !== employee.firstName) {
+            remainingEmployees.push(employee);
+        } 
+    }
+    employeeInfoArray = remainingEmployees;
+    renderTable(); 
+}
+
+
+//   let carsToKeep = [];
+//   for (let car of garage) {
+//     if (yearText !== car.year) {
+//       carsToKeep.push(car);
+//     }
+//   } 
+//   garage = carsToKeep;
+//   renderGarage(); 
+
+
+    // console.log($(this));
+    // console.log($(this).parent());
+    // console.log($(this).parent().parent());
+    // console.log($(this).parent().parent().children('#employeeFirstName'));
+    // console.log($(this).parent().parent().children('#employeeFirstName').text());
+    // console.log($(this).closest('tr').children('#employeeFirstName').text());
+    // console.log(employeeInfoArray[0].firstName);
+    // if (employee == $(this).closest('tr').children('#employeeFirstName').text()){
+    //     console.log(typeof employee);
+    //     console.log(typeof $(this).closest('tr').children('#employeeFirstName').text());
+    //     return true;
+    // } else if (employee === $(this).closest('tr').children('#employeeFirstName').text()){
+    //     console.log(typeof employee);
+    //     console.log(typeof $(this).closest('tr').children('#employeeFirstName').text());
+    //     return true;
+
+    // 
+
+
+// omeArray.filter(person => person.name != 'John');
 // The application should have an input form that collects:
 //  _employee first name, last name, ID number, job title, annual salary
 
@@ -113,5 +162,5 @@ function overBudget () {
     //      c. ✅ Input fields are cleared
     // 2. Calculate monthly costs using 1.a.
     //      a. ✅ Add these to the DOM
-    //      b. If monthly cost total exceeds $20k, field background becomes red
+    //      b. ✅ If monthly cost total exceeds $20k, field background becomes red
     // 3. Create a delete button that removes employee from DOM
