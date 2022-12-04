@@ -12,27 +12,27 @@ function readyNow () {
 // DUMMY DATA: Commented out, left for you to toggle
 let employeeInfoArray = [
 
-    // {
-    //     firstName: 'Lauren',
-    //     lastName: 'Heavey',
-    //     idNumber: '1234',
-    //     jobTitle: 'Professional',
-    //     annualSalary: 4500
-    // },
-    // {
-    //     firstName: 'Kat',
-    //     lastName: 'Lapitsky',
-    //     idNumber: '10000',
-    //     jobTitle: 'Cool Change Mgmt Consultant!! ',
-    //     annualSalary: 20000
-    // },
-    // {
-    //     firstName: 'RiCh LaDy',
-    //     lastName: 'OoOoOoH',
-    //     idNumber: '99',
-    //     jobTitle: 'idk how people make this kind of money',
-    //     annualSalary: 500000
-    // }
+    {
+        firstName: 'Lauren',
+        lastName: 'Heavey',
+        idNumber: '1234',
+        jobTitle: 'Professional',
+        annualSalary: 50000
+    },
+    {
+        firstName: 'Kat',
+        lastName: 'Lapitsky',
+        idNumber: '10000',
+        jobTitle: 'Cool Change Mgmt Consultant!! ',
+        annualSalary: 240000
+    },
+    {
+        firstName: 'RiCh LaDy',
+        lastName: 'OoOoOoH',
+        idNumber: '99',
+        jobTitle: 'idk how people make this kind of money',
+        annualSalary: 6000000
+    }
 ];
 
 // Takes data from input fields, adds it to array, clears input fields again
@@ -68,13 +68,15 @@ function addInfo () {
 function renderTable () {
     $('tbody').empty();
     for (let employee of employeeInfoArray) {
+        let employeeMonthlySalary = employee.annualSalary / 12;
+        let formattedSalary = Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(employeeMonthlySalary);
         $('tbody').append(`
         <tr>
             <td id="employeeFirstName">${employee.firstName}</td>
             <td>${employee.lastName}</td>
             <td>${employee.idNumber}</td>
             <td>${employee.jobTitle}</td>
-            <td>${employee.annualSalary}</td>
+            <td>${formattedSalary}</td>
             <td class="buttonCell"><button id="removeEmployeeButton">Remove Employee</button></td>
         </tr>
         `)
@@ -85,10 +87,11 @@ function renderTable () {
 // Adds salaries of each employee in array.
 // Kept monthlyCosts outside of function since I refer to it elsewhere
 let monthlyCosts = 0;
+let totalSalaries = 0;
 function calculateCosts () {
-    let totalSalaries = 0
+    totalSalaries = 0;
     for (let employee of employeeInfoArray) {
-        totalSalaries += parseInt(employee.annualSalary);
+        totalSalaries += (parseInt(employee.annualSalary)/12);
         // console.log(monthlyCosts);
     }
     monthlyCosts = parseInt(totalSalaries);
@@ -107,11 +110,11 @@ function renderCosts () {
 // Evaluates value of monthlyCosts and alters DOM depending on valuation.
 function overBudget () {    
     $('#alertEmojis').empty();
-    if (monthlyCosts > 20000) {
+    if (totalSalaries > 20000) {
         $('#displayedCost').css({ "background-color": "#FF1654", "color": "#FFFFFF",});
         $('#displayedCost').append(` 🚨`);
         $('#displayedCost').prepend(`🚨 `);
-        if (monthlyCosts > 500000) {
+        if (totalSalaries > 500000) {
             $('#alertEmojis').append(`
             <button id="bankruptcy">Uh-oh</button>
             `);
