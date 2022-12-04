@@ -45,14 +45,13 @@ th {
     text-align: center;
 }
 
-tr {
+tr, #costSection {
     background-color: #C8E5D1;   
 }
 
 tr:nth-child(even) {background-color: #E3F2E8;}
 
 #costSection {
-    background-color: #C8E5D1 ;
     margin-top: 22px;
     margin-left: 22px;
     max-width: 300px;

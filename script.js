@@ -9,7 +9,7 @@ function readyNow () {
     renderCosts();
 }
 
-// DUMMY DATA: Commented out, left for you to toggle
+// DUMMY DATA: Left this to make your life easier
 let employeeInfoArray = [
 
     {
@@ -63,8 +63,8 @@ function addInfo () {
     $('#annualSalaryInput').val('');
 }
 
-// Grabs info from array and puts it into a table. 
-// Also put some stuff in here related to css heights, not sure if it worked, too scared to delete
+// Grabs info from array and puts it into a table w/ a button. Divides annual salary, 
+// formats into USD. Also put some styling in here related to heights.
 function renderTable () {
     $('tbody').empty();
     for (let employee of employeeInfoArray) {
@@ -79,20 +79,18 @@ function renderTable () {
             <td>${formattedSalary}</td>
             <td class="buttonCell"><button id="removeEmployeeButton">Remove Employee</button></td>
         </tr>
-        `)
+        `);
     }
     $('#costSection').height($('#employeeInputTable').height());
 }
 
 // Adds salaries of each employee in array.
-// Kept monthlyCosts outside of function since I refer to it elsewhere
 let monthlyCosts = 0;
 let totalSalaries = 0;
 function calculateCosts () {
     totalSalaries = 0;
     for (let employee of employeeInfoArray) {
         totalSalaries += (parseInt(employee.annualSalary)/12);
-        // console.log(monthlyCosts);
     }
     monthlyCosts = parseInt(totalSalaries);
     return monthlyCosts;
@@ -102,7 +100,6 @@ function calculateCosts () {
 function renderCosts () {
     $('#displayedCost').empty();
     calculateCosts();
-    // Number(monthlyCosts);
     $('#displayedCost').append(`$${monthlyCosts}`);
     overBudget();
 }
@@ -124,7 +121,7 @@ function overBudget () {
     }
 }
 
-// Removes employee from table and array.
+// Removes employee from table and array. Runs renderCosts and renderTable functions.
 function removeEmployee () {
     let buttonLineFirstName = $(this).closest('tr').children('#employeeFirstName').text();
     let remainingEmployees = [];
@@ -138,7 +135,7 @@ function removeEmployee () {
     renderCosts();
 }
 
-// Hides majority of page, reveals hidden element
+// Hides majority of page, reveals surprise element.
 function declareBankruptcy () {
     $('main').hide();
     $('#startOver').css({ "display": "block"});
