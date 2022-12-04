@@ -9,13 +9,13 @@ function readyNow () {
 
 let employeeInfoArray = [
     // DUMMY DATA
-    // {
-    //     firstName: 'Lauren',
-    //     lastName: 'Heavey',
-    //     idNumber: '1234',
-    //     jobTitle: 'professional',
-    //     annualSalary: 450000
-    // }
+    {
+        firstName: 'Lauren',
+        lastName: 'Heavey',
+        idNumber: '1234',
+        jobTitle: 'professional',
+        annualSalary: 4500
+    }
 ];
 
 function addInfo () {
@@ -55,14 +55,14 @@ function renderTable () {
             <td>${employee.idNumber}</td>
             <td>${employee.jobTitle}</td>
             <td>${employee.annualSalary}</td>
-            <td><button id="removeEmployeeButton">Remove Employee</button></td>
+            <td class="buttonCell"><button id="removeEmployeeButton">Remove Employee</button></td>
         </tr>
         `)
     }
+    $('#costSection').height($('#employeeInputTable').height());
 }
 
 let monthlyCosts = 0;
-
 function calculateCosts () {
     let totalSalaries = 0
     for (let employee of employeeInfoArray) {
@@ -83,9 +83,13 @@ function renderCosts () {
 
 function overBudget () {    
     if (monthlyCosts > 20000) {
-        $('#displayedCost').css({ "background-color": "red"});
+        $('#displayedCost').css({ "background-color": "#FF1654", "color": "#FFFFFF",});
+        $('#displayedCost').append(` 🚨`);
+        $('#displayedCost').prepend(`🚨 `);
+        // $('monthlyCost').append('🚨 ');
+
     } else {
-        $('#displayedCost').css({ "background-color": "white"});
+        $('#displayedCost').css({ "background-color": "#E3F2E8"});
     }
 }
 
@@ -101,6 +105,8 @@ function removeEmployee () {
     renderTable(); 
     renderCosts();
 }
+
+$('#costSection').height($('#employeeInputTable').height());
 
 // BASE MODE 🅱️
 

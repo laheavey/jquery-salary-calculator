@@ -1,3 +1,87 @@
-* {
+/* * {
   outline: red 1px solid;
+} */
+
+main {
+    background-color: white;
+    color: #0B2832;
+}
+
+h1 {
+    color: white;
+    background-color: #3D8F81;
+    padding: 20px 10px;
+}
+
+table, th, tr, td {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-collapse: collapse;
+    border-color: #3D8F81;
+}
+
+table {
+    margin: 22px 0px;
+    flex: 5 0 400px;
+    border-left: 1px solid;
+    border-right: 1px solid;
+}
+
+th, td {
+    padding-left: 13px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+}
+
+th {
+    text-align: left;
+    background-color: #70C1B3;
+    height: 34.5px;
+}
+
+.buttonCell {
+    text-align: center;
+}
+
+tr {
+    background-color: #C8E5D1;   
+}
+
+tr:nth-child(even) {background-color: #E3F2E8;}
+
+#costSection {
+    background-color: #C8E5D1 ;
+    margin-top: 22px;
+    margin-left: 22px;
+    max-width: 300px;
+    width: 50%;
+    min-height: 130px;
+    border: 1px solid;
+    border-collapse: collapse;
+    border-color: #3D8F81;
+    align-self: flex-start;
+}
+
+h3 {
+    background-color: #70C1B3;
+    margin: 0px;
+    padding: 13px;
+}
+
+#infoSection {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    
+}
+
+#displayedCost {
+    margin: 22px;
+    font-size: 2rem;
+    text-align: center;
+}
+
+#alertEmojis {
+    margin: 22px;
 }
