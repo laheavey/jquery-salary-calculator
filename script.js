@@ -3,21 +3,39 @@ $(document).ready(readyNow);
 function readyNow () {
     $('#infoSubmissionButton').on('click', addInfo);
     $('body').on('click', '#removeEmployeeButton', removeEmployee);
+    $('body').on('click', '#bankruptcy', declareBankruptcy);
+    $('body').on('click', '#resetButton', resetPage);
     renderTable ();
     renderCosts();
 }
 
+// DUMMY DATA: Commented out, left for you to toggle
 let employeeInfoArray = [
-    // DUMMY DATA
-    {
-        firstName: 'Lauren',
-        lastName: 'Heavey',
-        idNumber: '1234',
-        jobTitle: 'professional',
-        annualSalary: 4500
-    }
+
+    // {
+    //     firstName: 'Lauren',
+    //     lastName: 'Heavey',
+    //     idNumber: '1234',
+    //     jobTitle: 'Professional',
+    //     annualSalary: 4500
+    // },
+    // {
+    //     firstName: 'Kat',
+    //     lastName: 'Lapitsky',
+    //     idNumber: '10000',
+    //     jobTitle: 'Cool Change Mgmt Consultant!! ',
+    //     annualSalary: 20000
+    // },
+    // {
+    //     firstName: 'RiCh LaDy',
+    //     lastName: 'OoOoOoH',
+    //     idNumber: '99',
+    //     jobTitle: 'idk how people make this kind of money',
+    //     annualSalary: 500000
+    // }
 ];
 
+// Takes data from input fields, adds it to array, clears input fields again
 function addInfo () {
     let newFirstName = $('#firstNameInput').val();
     let newLastName = $('#lastNameInput').val();
@@ -45,6 +63,8 @@ function addInfo () {
     $('#annualSalaryInput').val('');
 }
 
+// Grabs info from array and puts it into a table. 
+// Also put some stuff in here related to css heights, not sure if it worked, too scared to delete
 function renderTable () {
     $('tbody').empty();
     for (let employee of employeeInfoArray) {
@@ -62,6 +82,8 @@ function renderTable () {
     $('#costSection').height($('#employeeInputTable').height());
 }
 
+// Adds salaries of each employee in array.
+// Kept monthlyCosts outside of function since I refer to it elsewhere
 let monthlyCosts = 0;
 function calculateCosts () {
     let totalSalaries = 0
@@ -73,6 +95,7 @@ function calculateCosts () {
     return monthlyCosts;
 }
 
+// Runs calculateCosts function, displays total, runs overBudget function
 function renderCosts () {
     $('#displayedCost').empty();
     calculateCosts();
@@ -81,18 +104,24 @@ function renderCosts () {
     overBudget();
 }
 
+// Evaluates value of monthlyCosts and alters DOM depending on valuation.
 function overBudget () {    
+    $('#alertEmojis').empty();
     if (monthlyCosts > 20000) {
         $('#displayedCost').css({ "background-color": "#FF1654", "color": "#FFFFFF",});
         $('#displayedCost').append(` 🚨`);
         $('#displayedCost').prepend(`🚨 `);
-        // $('monthlyCost').append('🚨 ');
-
+        if (monthlyCosts > 500000) {
+            $('#alertEmojis').append(`
+            <button id="bankruptcy">Uh-oh</button>
+            `);
+        }
     } else {
-        $('#displayedCost').css({ "background-color": "#E3F2E8"});
+        $('#displayedCost').css({ "background-color": "#E3F2E8", "color": "#0B2832"});
     }
 }
 
+// Removes employee from table and array.
 function removeEmployee () {
     let buttonLineFirstName = $(this).closest('tr').children('#employeeFirstName').text();
     let remainingEmployees = [];
@@ -106,42 +135,57 @@ function removeEmployee () {
     renderCosts();
 }
 
-$('#costSection').height($('#employeeInputTable').height());
+// Hides majority of page, reveals hidden element
+function declareBankruptcy () {
+    $('main').hide();
+    $('#startOver').css({ "display": "block"});
+}
 
-// BASE MODE 🅱️
+// Clears array and resets monthlyCosts total. 
+// Displays main page again, hides surprise element. 
+function resetPage () {
+    $('main').show();
+    $('#startOver').css({"display":"none"});
+    employeeInfoArray.splice(0,employeeInfoArray.length);
+    monthlyCosts = 0;
+    renderTable ();
+    renderCosts ();
+}
 
-// The application should have an input form that collects:
-//  _employee first name, last name, ID number, job title, annual salary
+// BASE MODE 
 
-// A 'Submit' button should collect the form information, 
-// store the information to calculate monthly costs, append information to 
-// the DOM and clear the input fields. 
+    // The application should have an input form that collects:
+    //  _employee first name, last name, ID number, job title, annual salary
 
-// Using the stored information, calculate monthly costs and append this to 
-// the to DOM. 
-// If the total monthly cost exceeds $20,000, add a red background color to the 
-// total monthly cost.
+    // A 'Submit' button should collect the form information, 
+    // store the information to calculate monthly costs, append information to 
+    // the DOM and clear the input fields. 
 
-// Create a delete button that removes an employee from the DOM. 
-// For Base mode, it does **not** need to remove that Employee's salary from the 
-// reported total.
+    // Using the stored information, calculate monthly costs and append this to 
+    // the to DOM. 
+    // If the total monthly cost exceeds $20,000, add a red background color to the 
+    // total monthly cost.
 
-    // 1. ✅ Create an input form that collects the above parameters w/ a submit button.
-    //      a. ✅ Submit button grabs form info & stores it (in an array? or object?)
-    //      b. ✅ Info added to table on the DOM
-    //      c. ✅ Input fields are cleared
-    // 2. Calculate monthly costs using 1.a.
-    //      a. ✅ Add these to the DOM
-    //      b. ✅ If monthly cost total exceeds $20k, field background becomes red
-    // 3. ✅ Create a delete button that removes employee from DOM
+    // Create a delete button that removes an employee from the DOM. 
+    // For Base mode, it does **not** need to remove that Employee's salary from the 
+    // reported total.
 
-// STRETCH MODE 🙆‍♀️
+        // 1. ✅ Create an input form that collects the above parameters w/ a submit button.
+        //      a. ✅ Submit button grabs form info & stores it (in an array? or object?)
+        //      b. ✅ Info added to table on the DOM
+        //      c. ✅ Input fields are cleared
+        // 2. Calculate monthly costs using 1.a.
+        //      a. ✅ Add these to the DOM
+        //      b. ✅ If monthly cost total exceeds $20k, field background becomes red
+        // 3. ✅ Create a delete button that removes employee from DOM
 
-// Add styling or extra functionality that fits with the theme of this assignment.
+// STRETCH MODE 
 
-// ✅ Once the employee is deleted, update the _Total Monthly Cost_ section on the page 
-// to reflect the employee's removal. _HINT:_ You will need to figure out which employee 
-// was removed, in order to subtract their salary from the total. Consider using `.text()` 
-// as a getter, or look into jQuery's `.data()` function. This is tricky!
+    // ✅ Add styling or extra functionality that fits with the theme of this assignment.
+
+    // ✅ Once the employee is deleted, update the _Total Monthly Cost_ section on the page 
+    // to reflect the employee's removal. _HINT:_ You will need to figure out which employee 
+    // was removed, in order to subtract their salary from the total. Consider using `.text()` 
+    // as a getter, or look into jQuery's `.data()` function. This is tricky!
 
 
