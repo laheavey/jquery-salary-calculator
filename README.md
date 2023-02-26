@@ -1,4 +1,4 @@
-# Salary Calculator
+# jQuery Salary Calculator
 
 ## Description
 
